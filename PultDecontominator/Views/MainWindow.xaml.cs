@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace PultDecontominator
+namespace PultDecontominator.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
