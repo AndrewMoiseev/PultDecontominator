@@ -1,7 +1,6 @@
-﻿using Microsoft.Practices.Unity;
-using Prism.Unity;
-using System.Windows;
+﻿using Prism.Unity;
 using PultDecontominator.Views;
+using System.Windows;
 
 namespace PultDecontominator
 {
@@ -9,11 +8,13 @@ namespace PultDecontominator
     {
         protected override DependencyObject CreateShell()
         {
-           return Container.Resolve<MainWindow>();
+//            return Container.TryResolve<MainWindow>();
+            return Container.TryResolve<Auth>();
         }
 
         protected override void InitializeShell()
         {
+//            Application.Current.Auth.Show();
             Application.Current.MainWindow.Show();
         }
     }
