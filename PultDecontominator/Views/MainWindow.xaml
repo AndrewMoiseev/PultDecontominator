@@ -9,14 +9,22 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <DockPanel x:Name="stackPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Height="332.202" Margin="28.305,30.399,20.305,56.399" Width="743.39">
-        <Grid Width="271.333" Height="32.202" VerticalAlignment="Top">
+        <Grid Width="481.333" Margin="0,0,0,10">
             <Label Content="Выбор установки:" HorizontalAlignment="Left" Width="130" Height="32" VerticalAlignment="Top" d:LayoutOverrides="TopMargin, BottomMargin" />
-            <ComboBox Text="Номер деконтоминатора" Margin="117,0,0,0" Height="32" VerticalAlignment="Top" ItemsSource="{Binding Decontominators}" >
+            <ComboBox Text="Номер деконтоминатора" Margin="140,0,0,0" Width="70" Height="32" VerticalAlignment="Top" ItemsSource="{Binding Decontominators}" HorizontalAlignment="Left" d:LayoutOverrides="Width" >
                 <ComboBox.Effect>
                     <DropShadowEffect BlurRadius="3" Color="#FF4F4343" Opacity="0.815" ShadowDepth="3"/>
                 </ComboBox.Effect>
 
             </ComboBox>
+            <TextBlock Height="50" Margin="10,60,0,0" TextWrapping="Wrap" Text="текущий режим" VerticalAlignment="Top" Width="100" HorizontalAlignment="Left" d:LayoutOverrides="Width, LeftMargin, RightMargin" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" TextAlignment="Center" FontSize="16"/>
+            <TextBlock Height="30" Margin="140,60,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="100" HorizontalAlignment="Left" d:LayoutOverrides="Width, LeftMargin, RightMargin" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" TextAlignment="Center" FontSize="16"/>
+            <TextBlock Height="30" Margin="10,140,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="100" HorizontalAlignment="Left" d:LayoutOverrides="Width, LeftMargin, RightMargin" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" TextAlignment="Center" FontSize="16"/>
+            <TextBlock Height="30" Margin="10,180,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="100" HorizontalAlignment="Left" d:LayoutOverrides="Width, LeftMargin, RightMargin" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" TextAlignment="Center" FontSize="16"/>
+            <TextBlock Height="30" Margin="10,220,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="100" HorizontalAlignment="Left" d:LayoutOverrides="Width, LeftMargin, RightMargin" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" TextAlignment="Center" FontSize="16"/>
+        </Grid>
+        <Grid>
+
         </Grid>
         <CheckBox IsChecked="{Binding IsEnabled}" Content="Can Execute Command" Margin="10" Visibility="Hidden"/>
         <Button Command="{Binding ExecuteDelegateCommand}" Content="DelegateCommand" Margin="10" Visibility="Hidden"/>
@@ -25,6 +33,7 @@
         <Button Command="{Binding ExecuteGenericDelegateCommand}" CommandParameter="Passed Parameter" Content="DelegateCommand Generic" Margin="10" Visibility="Hidden"/>
         <TextBlock Text="{Binding UpdateText}" Margin="10" FontSize="22" Visibility="Hidden"/>
         <Button Content="Button"  Margin="10" Visibility="Hidden"/>
+
 
 
 
