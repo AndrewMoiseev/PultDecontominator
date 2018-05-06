@@ -6,6 +6,8 @@ namespace PultDecontominator.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
+        public bool AuthTrue { get; set; }
+
         public bool IsEnabled
         {
             get { return _isEnabled; }
@@ -41,6 +43,8 @@ namespace PultDecontominator.ViewModels
             DelegateCommandObservesCanExecute = new DelegateCommand(Execute).ObservesCanExecute(() => IsEnabled);
 
             ExecuteGenericDelegateCommand = new DelegateCommand<string>(ExecuteGeneric).ObservesCanExecute(() => IsEnabled);
+
+            AuthTrue = true;
         }
 
         private void Execute()

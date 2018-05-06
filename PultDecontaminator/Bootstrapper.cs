@@ -8,14 +8,12 @@ namespace PultDecontominator
     {
         protected override DependencyObject CreateShell()
         {
-//            return Container.TryResolve<MainWindow>();
-            return Container.TryResolve<Auth>();
+            return Container.TryResolve<MainWindow>();
         }
 
         protected override void InitializeShell()
         {
-//            Application.Current.Auth.Show();
-            Application.Current.MainWindow.Show();
+            //Application.Current.MainWindow.Show();
         }
     }
 }
