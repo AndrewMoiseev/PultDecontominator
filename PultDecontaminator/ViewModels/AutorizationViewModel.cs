@@ -9,27 +9,39 @@ namespace PultDecontominator.ViewModels
     {
         public Action CloseAction { get; set; }
         public DelegateCommand LoginDelegateCommand { get; private set; }
+        public int CntTryPassword { get; set; }
 
-        private string _name;
         public string Name
         {
             get { return _name; }
             set { SetProperty(ref _name, value); }
         }
+        public string Password
+        {
+            get { return _passw; }
+            set { SetProperty(ref _passw, value); }
+        }
 
         public AutorizationViewModel()
         {
-            LoginDelegateCommand = new DelegateCommand(CloseAuth, CanExecute);
+            LoginDelegateCommand = new DelegateCommand(CloseAuth );
+            CntTryPassword = 0;
         }
 
         private void CloseAuth()
         {
-            Application.Current.MainWindow.Show();
-            CloseAction();
+            if (Password == "12345")
+            {
+                Application.Current.MainWindow.Show();
+                CloseAction();
+            }
+            else
+            {
+                CntTryPassword++;
+                MessageBox.Show("Неверных попыток: " + CntTryPassword.ToString());
+            }
         }
-        private bool CanExecute()
-        {
-            return true;
-        }
+        private string _name;
+        private string _passw;
     }
 }

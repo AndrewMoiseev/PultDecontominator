@@ -133,9 +133,11 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\DataModbus.cs" />
     <Compile Include="Services\AuthService.cs" />
     <Compile Include="Services\IAuthService.cs" />
     <Compile Include="Services\IModbusService.cs" />
+    <Compile Include="Services\ModbusService.cs" />
     <Compile Include="ViewModels\AutorizationViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\Autorization.xaml.cs">

@@ -7,47 +7,20 @@
         prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:local="clr-namespace:PultDecontominator.Views"
         mc:Ignorable="d"
-        Title="Авторизация"  WindowStyle="ToolWindow" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
-    <Grid Margin="5" >
+        Title="Авторизация"  WindowStyle="ToolWindow" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Margin="15" >
         <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="20"  />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto"  />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto"  />
-        </Grid.ColumnDefinitions>
-        <Image Grid.RowSpan="2" />
-        <GroupBox Grid.Column="1" Header="Пользователь" Grid.Row="0">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Имя:" HorizontalAlignment="Right" />
-                <TextBlock Grid.Row="1" Text="Пароль:" HorizontalAlignment="Right" />
-                <ComboBox Grid.Row="0" Grid.Column="2">
-                    <ComboBoxItem Selector.IsSelected="True">Иванов</ComboBoxItem>
-                    <ComboBoxItem>Петров</ComboBoxItem>
-                    <ComboBoxItem>Сидоров</ComboBoxItem>
-                </ComboBox>
-                <PasswordBox Grid.Column="2" Grid.Row="1"/>
-            </Grid>
-        </GroupBox>
-        <Grid Grid.Column="1" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition  SharedSizeGroup="Button"/>
-                <ColumnDefinition  SharedSizeGroup="Button"/>
-            </Grid.ColumnDefinitions>
-            <Button  Command="{Binding LoginDelegateCommand}" Content="ОК" Grid.Column="1" />
-            <Button  Command="{Binding LoginDelegateCommand}" Content="Отмена" Grid.Column="2" />
-            
-        </Grid>
+        <TextBlock>Введите пароль:</TextBlock>
+        <TextBox Name="passwordBox" Text="{Binding Password}" Grid.Row="1" MinWidth="250" ></TextBox>
 
-    </Grid>
+        <WrapPanel Grid.Row="2" HorizontalAlignment="Right" Margin="0,15,0,0">
+            <Button IsDefault="True" Command="{Binding LoginDelegateCommand}" MinWidth="60" Margin="0,0,10,0">OK</Button>
+            <Button IsCancel="True" Command="{Binding LoginDelegateCommand}" MinWidth="60" IsEnabled="False">Отмена</Button>
+        </WrapPanel>
+
+</Grid>
 </Window>
