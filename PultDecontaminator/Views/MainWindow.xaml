@@ -7,7 +7,7 @@
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
-        Title="Пульт управления деконтаминатором" Height="450" Width="800">
+        Title="Пульт управления деконтаминатором" Height="450" Width="1116">
     <Grid Background="#FFB7BFC1" IsEnabled="{Binding AuthTrue}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -15,7 +15,7 @@
             <ColumnDefinition Width="0.5*" />
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -25,7 +25,15 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="0.5*"></RowDefinition>
         </Grid.RowDefinitions>
-
+        <ListView x:Name="ListViewRegisters" Grid.Column="5" Grid.Row="0" Grid.RowSpan="6" ItemsSource="{Binding Decontaminators}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Описание" Width="300" DisplayMemberBinding="{Binding Path=Description}"/>
+                    <GridViewColumn Header="значение" Width="150" DisplayMemberBinding="{Binding Path=LastName}"/>
+                    <GridViewColumn Header="переменная" Width="80" DisplayMemberBinding="{Binding Path=ID}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
         <GridSplitter Grid.Column="1"  Grid.Row="0" Width="2" 
                       HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.RowSpan="4" />
         <GridSplitter Grid.Column="4"  Grid.Row="0" Width="2" 

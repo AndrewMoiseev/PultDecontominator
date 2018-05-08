@@ -1,0 +1,320 @@
+bt_enable_change;Panel;LB;0;Разрешение изменений;Неопределенный
+rw_address_rs485;Panel;RW;0;;16-bit Unsigned
+mode;Panel;LW;1;Код режима;16-bit Unsigned
+bt_enable_work;Panel;LB;1;Активен штатный алгоритм работы;Неопределенный
+rw_brightness;Panel;RW;1;;16-bit Unsigned
+stage;Panel;LW;2;Этап;16-bit Unsigned
+bt_enable_test;Panel;LB;2;Активен алгоритм режима ТЕСТ;Неопределенный
+bt_enable_mk_comm;Panel;LB;3;Включен информационный обмен с МК;Неопределенный
+bt_hand_on;Panel;LB;4;Активен ручной режим;Неопределенный
+bt_change_mode;Panel;LB;5;Выполнить макрос при изменении режима;Неопределенный
+bt_ready_to_start;Panel;LB;6;Достигнуто состояние готовности;Неопределенный
+bt_h2o2_sensor_ready;Panel;LB;7;Сенсор перекиси прогрет;Неопределенный
+bt_save_preference;Panel;LB;8;Выполнить макрос сохранения настроек;Неопределенный
+bt_emulation_on;Panel;LB;9;Режим эмуляции входных сигналов;Неопределенный
+rw_first_load;Panel;RW;9;;16-bit Unsigned
+bt_calc_params_dependent_on_capacity;Panel;LB;10;Выполнить макрос расчёта параметров зависимых от объема;Неопределенный
+bt_stage_pause_cnt_set;Panel;LB;11;счётчик этапа паузы взведён;Неопределенный
+bt_stage_pause_cnt_stop;Panel;LB;12;отсчёт времени этапа пазуы закончен;Неопределенный
+bt_stage_conc_gaining_cnt_set;Panel;LB;13;счётчик этапа выхода на концентрацию взведен;Неопределенный
+bt_stage_conc_gaining_cnt_stop;Panel;LB;14;Достигнута концентрация или отсчитано время;Неопределенный
+bt_stage_desactivation_cnt_set;Panel;LB;15;счётчик этапа дезактивации взведён;Неопределенный
+bt_stage_desactivation_cnt_stop;Panel;LB;16;отсчёт времени этапа дезактивации закончен;Неопределенный
+bt_stage_conc_gaining_get;Panel;LB;17;Достигнута требуемая концентрация;Неопределенный
+bt_stage_decontamination_cnt_set;Panel;LB;18;счётчик этапа дезинфекции взведён;Неопределенный
+bt_stage_decontamination_cnt_stop;Panel;LB;19;;Неопределенный
+bt_mode_ext_dehum_cnt_set;Panel;LB;20;счётчик режима дополнительного осушения взведён;Неопределенный
+bt_mode_ext_dehum_cnt_stop;Panel;LB;21;;Неопределенный
+bt_TE_air_in_range;Panel;LB;22;Температура воздуха ТЭН в допустимых пределах;Неопределенный
+bt_TE_condenser_in_range;Panel;LB;23;Температура воздуха испарителя в допустимых пределах;Неопределенный
+bt_check_password;Panel;LB;24;Выполнить макрос проверки пароля;Неопределенный
+bt_M1_rpm_in_range;Panel;LB;25;Обороты М1 в допустимых пределах;Неопределенный
+bt_M2_rpm_in_range;Panel;LB;26;Обороты М2 в допустимых пределах;Неопределенный
+bt_humidity_out_of_range;Panel;LB;27;Влажность ниже допустимого диапазона;Неопределенный
+bt_concentration_out_of_range;Panel;LB;28;Концентрация перекиси ниже диапазона;Неопределенный
+bt_humidity_in_ext_dehum_in_range;Panel;LB;29;Влажность в режиме доп.осушение в норме;Неопределенный
+bt_mode_desactivation_concentration_OK;Panel;LB;30;Концентрация перекиси на этапе дезактивации упала ниже необходимого уровня (1ppm);Неопределенный
+bt_temperature_exposition_in_range;Panel;LB;31;Температура для экспозиции в норме;Неопределенный
+bt_humidity_exposition_in_range;Panel;LB;32;Влажность для начала экспозиции в норме;Неопределенный
+set_room_capacity;Panel;LW;100;Объем помещения;16-bit Unsigned
+set_concentration_H2O2;Panel;LW;101;Уставка концентрации перекиси;16-bit Unsigned
+set_time_decontamination;Panel;LW;102;Длительность времени обеззараживания (в минутах);16-bit Unsigned
+set_upper_temperature_exposition;Panel;LW;103;Верхний предел температуры воздуха для начала экспозиции;16-bit Unsigned
+set_humidity_exposition;Panel;LW;104;Влажность для начала экспозиции;16-bit Unsigned
+set_max_dehumi_time;Panel;LW;105;Максимально допустимое время осушения (в минутах);16-bit Unsigned
+set_temperature_TEH_condenser;Panel;LW;106;Температура ТЭН испарителя;16-bit Unsigned
+set_temperature_TEH_air;Panel;LW;107;Температура ТЭН воздуха;16-bit Unsigned
+set_rpm_M1;Panel;LW;108;Количество оборотов М1;16-bit Unsigned
+set_rpm_M2;Panel;LW;109;Количество оборотов М2;16-bit Unsigned
+set_pump_cnt_OFF_stage1;Panel;LW;110;не используется;16-bit Unsigned
+set_pump_cnt_OFF_stage2;Panel;LW;111;выход на концентрацию;16-bit Unsigned
+set_pump_cnt_OFF_stage3;Panel;LW;112;обеззараживание;16-bit Unsigned
+set_pump_cnt_OFF_stage4;Panel;LW;113;не используется;16-bit Unsigned
+set_pump_cnt_ON_stage1;Panel;LW;114;выход на концентрацию 1;16-bit Unsigned
+set_pump_cnt_ON_stage2;Panel;LW;115;выход на концентрацию 2;16-bit Unsigned
+set_pump_cnt_ON_stage3;Panel;LW;116;обеззараживание;16-bit Unsigned
+set_pump_cnt_ON_stage4;Panel;LW;117;дезактивация;16-bit Unsigned
+set_H2O2_sensor_prepare_to_work;Panel;LW;118;время на прогрев сенсора (в секундах);16-bit Unsigned
+set_time_pause;Panel;LW;119;время на паузу перед деконтаминацией (в секундах);16-bit Unsigned
+pid_P_TEH;Panel;LW;120;;32-bit Float
+pid_I_TEH;Panel;LW;122;;32-bit Float
+pid_D_TEH;Panel;LW;124;;32-bit Float
+pid_gyst_TEH;Panel;LW;126;;32-bit Float
+set_temperature_TEH_condenser_diap;Panel;LW;130;Диапазон температуры испарителя;16-bit Unsigned
+set_temperature_TEH_air_diap;Panel;LW;131;Диапазон температуры воздуха;16-bit Unsigned
+set_time_stage_conc_gaining_pump_on_first;Panel;LW;132;Время включения насоса при включении этапа выхода на концентрацию;16-bit Unsigned
+set_time_TE_condenser_out_of_range;Panel;LW;133;Время на нахождение температуры испарителя вне допустимого диапазона (сек);16-bit Unsigned
+set_time_TE_air_out_of_range;Panel;LW;134;Время на нахождение температуры воздуха ТЭН вне допустимого диапазона (сек);16-bit Unsigned
+set_gyst_rpm;Panel;LW;135;Диапазон нечувствительности оборотов;16-bit Unsigned
+set_time_rpm_M1_out_of_range;Panel;LW;136;Время на нахождение оборотов М1 вне допустимого диапазона;16-bit Unsigned
+set_time_rpm_M2_out_of_range;Panel;LW;137;Время на нахождение оборотов М2 вне допустимого диапазона;16-bit Unsigned
+set_rpm_diap;Panel;LW;138;Допустимый диапазон оборотов (в процентах от уставки);16-bit Unsigned
+set_temperature_TEH_air_reg_ON;Panel;LW;139;Температура включения нагрева воздуха (от уставки);16-bit Unsigned
+set_temperarute_TEH_air_reg_OFF;Panel;LW;140;Температура отключения нагрева воздуха (от уставки);16-bit Unsigned
+set_concentration_H2O2_reg_ON;Panel;LW;141;Уставка концентрации перекиси для включения насоса (от уставки);16-bit Unsigned
+set_concentration_H2O2_reg_OFF;Panel;LW;142;Уставка концентрации перекиси для отключения насоса (от уставки);16-bit Unsigned
+set_concentration_diap;Panel;LW;143;Диапазон концентрации (анализ только если выход за нижнюю границу) в % от уставки;16-bit Unsigned
+set_time_concentration_out_of_range;Panel;LW;144;Время на нахождение концентрации вне допустимого диапазона;16-bit Unsigned
+set_time_dampers;Panel;LW;145;Время на соответствие концевика заслонки управляющему сигналу;16-bit Unsigned
+set_max_ext_dehum_time;Panel;LW;146;"Максимальное время режима ""Дополнительное осушение"" (в минутах)";16-bit Unsigned
+set_max_count_start_ext_dehum;Panel;LW;147;"Максимальное количество запусков режима ""Дополнительное осушение""";16-bit Unsigned
+set_max_humidity_in_decontamination;Panel;LW;148;Значение влажности выше которой вкл режим дополнительного осушения;16-bit Unsigned
+set_humidity_in_ext_dehum;Panel;LW;149;"Уставка влажности в режиме ""Дополнительное осушение""";16-bit Unsigned
+set_lower_temperature_exposition;Panel;LW;150;Нижний предел температуры воздуха для начала экспозиции;16-bit Unsigned
+set_time_rpm_reg;Panel;LW;151;Время цикла регулировки оборотов;16-bit Unsigned
+set_min_out_M1;Panel;LW;152;Минимальный сигнал регулирования М1;16-bit Unsigned
+set_min_out_M2;Panel;LW;153;Минимальный сигнал регулирования М2;16-bit Unsigned
+step_diap_multiply10_M1;Panel;LW;154;Граница оборотов за которой производится добавление/убавление 10% производительности;16-bit Unsigned
+step_diap_multiply10_M2;Panel;LW;155;Граница оборотов за которой производится добавление/убавление 10% производительности;16-bit Unsigned
+set_min_concentration_in_desactivation;Panel;LW;156;Значение концентрации перекиси меньше которой считается, что дезактивация прошла успешно;16-bit Unsigned
+next_address_ust;Panel;LW;157;Следующий свободный адрес уставки;16-bit Unsigned
+mkai_concentration_H2O2;Panel;LW;200;;16-bit Unsigned
+mkai_temperature_air;Panel;LW;201;;16-bit Unsigned
+mkai_humidity_air;Panel;LW;202;;16-bit Unsigned
+mk_ai4;Panel;LW;203;;16-bit Unsigned
+mkai_temperature_TEH_condenser;Panel;LW;204;;16-bit Unsigned
+mkai_temperature_TEH_air;Panel;LW;205;;16-bit Unsigned
+mk_ai7;Panel;LW;206;;16-bit Unsigned
+mk_ai8;Panel;LW;207;;16-bit Unsigned
+mk_di1;Panel;LW;208;;16-bit Unsigned
+mk_di2;Panel;LW;209;;16-bit Unsigned
+mkdi_Y1_close;Panel;LW;210;;16-bit Unsigned
+mkdi_Y1_open;Panel;LW;211;;16-bit Unsigned
+mkdi_Y2_close;Panel;LW;212;;16-bit Unsigned
+mkdi_Y2_open;Panel;LW;213;;16-bit Unsigned
+mkdi_ts;Panel;LW;214;;16-bit Unsigned
+mk_di8;Panel;LW;215;;16-bit Unsigned
+mkdo_Y1_on;Panel;LW;216;;16-bit Unsigned
+mkdo_Y2_on;Panel;LW;217;;16-bit Unsigned
+mkdo_TEHair_on;Panel;LW;218;;16-bit Unsigned
+mkdo_dehum_on;Panel;LW;219;;16-bit Unsigned
+mkdo_pump_on;Panel;LW;220;;16-bit Unsigned
+mkdo_valve_on;Panel;LW;221;;16-bit Unsigned
+mkdo_M2_out;Panel;LW;222;;16-bit Unsigned
+mkdo_TEHcondenser_out;Panel;LW;223;;16-bit Unsigned
+mkdo_M1_out;Panel;LW;224;;16-bit Unsigned
+mkao_lamp_work;Panel;LW;225;;16-bit Unsigned
+mkao_lamp_alarm;Panel;LW;226;;16-bit Unsigned
+mk_ao4;Panel;LW;227;;16-bit Unsigned
+mk_ao5;Panel;LW;228;;16-bit Unsigned
+mk_ao6;Panel;LW;229;;16-bit Unsigned
+mk_ao7;Panel;LW;230;;16-bit Unsigned
+mk_ao8;Panel;LW;231;;16-bit Unsigned
+mkcs_M1_rpm;Panel;LW;232;;16-bit Unsigned
+mkcs_M2_rpm;Panel;LW;233;;16-bit Unsigned
+mk_cs3;Panel;LW;234;;16-bit Unsigned
+mk_cs4;Panel;LW;235;;16-bit Unsigned
+mk_cs5;Panel;LW;236;;16-bit Unsigned
+mk_cs6;Panel;LW;237;;16-bit Unsigned
+mk_cs7;Panel;LW;238;;16-bit Unsigned
+mk_cs8;Panel;LW;239;;16-bit Unsigned
+mk_res1;Panel;LW;240;;16-bit Unsigned
+mk_res2;Panel;LW;241;;16-bit Unsigned
+mk_res3;Panel;LW;242;;16-bit Unsigned
+mk_res4;Panel;LW;243;;16-bit Unsigned
+mk_res5;Panel;LW;244;;16-bit Unsigned
+mk_res6;Panel;LW;245;;16-bit Unsigned
+mk_res7;Panel;LW;246;;16-bit Unsigned
+mk_res8;Panel;LW;247;;16-bit Unsigned
+mk_PWMon1;Panel;LW;248;;16-bit Unsigned
+mk_PWMon2;Panel;LW;249;;16-bit Unsigned
+mk_PWMon3;Panel;LW;250;;16-bit Unsigned
+mk_PWMon4;Panel;LW;251;;16-bit Unsigned
+mk_PWMon5;Panel;LW;252;;16-bit Unsigned
+mk_PWMon6;Panel;LW;253;;16-bit Unsigned
+mk_PWMon7;Panel;LW;254;;16-bit Unsigned
+mk_PWMon8;Panel;LW;255;;16-bit Unsigned
+mk_PWMout1;Panel;LW;256;;16-bit Unsigned
+mk_PWMout2;Panel;LW;257;;16-bit Unsigned
+mk_PWMout3;Panel;LW;258;;16-bit Unsigned
+mk_PWMout4;Panel;LW;259;;16-bit Unsigned
+mk_PWMout5;Panel;LW;260;;16-bit Unsigned
+mk_PWMout6;Panel;LW;261;;16-bit Unsigned
+mk_PWMout7;Panel;LW;262;;16-bit Unsigned
+mk_PWMout8;Panel;LW;263;;16-bit Unsigned
+fl_concentration_H2O2;Panel;LW;300;;32-bit Float
+fl_temperature_air;Panel;LW;302;;32-bit Float
+fl_humidity_air;Panel;LW;304;;32-bit Float
+fl_temperature_TEH_condenser;Panel;LW;306;;32-bit Float
+fl_temperature_TEH_air;Panel;LW;308;;32-bit Float
+cs_M1_rpm;Panel;LW;310;;16-bit Unsigned
+cs_M2_rpm;Panel;LW;311;;16-bit Unsigned
+do_Y1_on;Panel;LW;400;;16-bit Unsigned
+do_Y2_on;Panel;LW;401;;16-bit Unsigned
+do_TEHair_on;Panel;LW;402;;16-bit Unsigned
+do_dehum_on;Panel;LW;403;;16-bit Unsigned
+do_pump_on;Panel;LW;404;;16-bit Unsigned
+do_valve_on;Panel;LW;405;;16-bit Unsigned
+do_M2_out;Panel;LW;406;;16-bit Unsigned
+do_TEHcondenser_out;Panel;LW;407;;16-bit Unsigned
+ao_M1_out;Panel;LW;408;;16-bit Unsigned
+ao_lamp_work;Panel;LW;409;;16-bit Unsigned
+ao_lamp_alarm;Panel;LW;410;;16-bit Unsigned
+ao4;Panel;LW;411;;16-bit Unsigned
+ao5;Panel;LW;412;;16-bit Unsigned
+ao6;Panel;LW;413;;16-bit Unsigned
+ao7;Panel;LW;414;;16-bit Unsigned
+ao8;Panel;LW;415;;16-bit Unsigned
+PWMon1;Panel;LW;416;;16-bit Unsigned
+PWMon2;Panel;LW;417;;16-bit Unsigned
+PWMon3;Panel;LW;418;;16-bit Unsigned
+PWMon4;Panel;LW;419;;16-bit Unsigned
+PWMon5;Panel;LW;420;;16-bit Unsigned
+PWMon6;Panel;LW;421;;16-bit Unsigned
+PWMon7;Panel;LW;422;;16-bit Unsigned
+PWMon8;Panel;LW;423;;16-bit Unsigned
+PWMout1;Panel;LW;424;;16-bit Unsigned
+PWMout2;Panel;LW;425;;16-bit Unsigned
+PWMout3;Panel;LW;426;;16-bit Unsigned
+PWMout4;Panel;LW;427;;16-bit Unsigned
+PWMout5;Panel;LW;428;;16-bit Unsigned
+PWMout6;Panel;LW;429;;16-bit Unsigned
+PWMout7_M2;Panel;LW;430;;16-bit Unsigned
+PWMout8_TEHcondenser;Panel;LW;431;;16-bit Unsigned
+command_from_pult;Panel;LW;1000;Код команды от пульта;16-bit Unsigned
+alarms;Panel;LW;2000;Отказы системы;32-bit Unsigned
+alarms_type1;Panel;LW;2000;Отказы системы тип 1;16-bit Unsigned
+alarms_type2;Panel;LW;2001;Отказы системы тип 2;16-bit Unsigned
+alarms_type3;Panel;LW;2002;Отказы системы тип 3 (расшифровка);16-bit Unsigned
+window_number_on_main;Panel;LW;3000;Номер окна;16-bit Unsigned
+mode_select;Panel;LW;3001;Выбор режима;16-bit Unsigned
+stage_select;Panel;LW;3002;Выбор этапа;16-bit Unsigned
+cnt_time_sec_decontamination;Panel;LW;3004;Счётчик длительности (в секундах);16-bit Unsigned
+cnt_time_min_decontamination;Panel;LW;3006;Счётчик длительности (в минутах);16-bit Unsigned
+cnt_time_hour_decontamination;Panel;LW;3007;Счётчик длительности (в часах);16-bit Unsigned
+cnt_max_dehumi_time_sec;Panel;LW;3008;Счётчик максимально допустимого времени;16-bit Unsigned
+pump_stage_work;Panel;LW;3010;этап работы насоса (всего 4);16-bit Unsigned
+pump_cnt_ON;Panel;LW;3011;счётчик включенного состояния насоса;16-bit Unsigned
+pump_cnt_OFF;Panel;LW;3012;счётчик отключенного состояния насоса;16-bit Unsigned
+pump_stage_work_mem;Panel;LW;3013;память режима работы насоса (в алгоритме переключения);16-bit Unsigned
+cnt_H2O2_sensor_prepare_to_work;Panel;LW;3014;счетчик времени прогрева;16-bit Unsigned
+window_number_confirm;Panel;LW;3015;номер окна в которое выводятся подтверждения операций;16-bit Unsigned
+cnt_time_pause_sec;Panel;LW;3016;счётчик секунд паузы (обратный отсчёт);16-bit Unsigned
+cnt_time_pause_min;Panel;LW;3017;счетчик минут паузы (обратный отсчёт);16-bit Unsigned
+mode_mem;Panel;LW;3020;Память режима;16-bit Unsigned
+stage_mem;Panel;LW;3021;Память этапа;16-bit Unsigned
+cnt_alarm_link;Panel;LW;3030;;16-bit Unsigned
+emul_mkai_concentration_H2O2;Panel;LW;3040;;16-bit Unsigned
+emul_mkai_temperature_air;Panel;LW;3041;;16-bit Unsigned
+emul_mkai_humidity_air;Panel;LW;3042;;16-bit Unsigned
+emul_mk_ai4;Panel;LW;3043;;16-bit Unsigned
+emul_mkai_temperature_TEH_condenser;Panel;LW;3044;;16-bit Unsigned
+emul_mkai_temperature_TEH_air;Panel;LW;3045;;16-bit Unsigned
+emul_mk_ai7;Panel;LW;3046;;16-bit Unsigned
+emul_mk_ai8;Panel;LW;3047;;16-bit Unsigned
+emul_mk_di1;Panel;LW;3048;;16-bit Unsigned
+emul_mk_di2;Panel;LW;3049;;16-bit Unsigned
+emul_mkdi_Y1_close;Panel;LW;3050;;16-bit Unsigned
+emul_mkdi_Y1_open;Panel;LW;3051;;16-bit Unsigned
+emul_mkdi_Y2_close;Panel;LW;3052;;16-bit Unsigned
+emul_mkdi_Y2_open;Panel;LW;3053;;16-bit Unsigned
+emul_mkdi_ts;Panel;LW;3054;;16-bit Unsigned
+emul_mk_di8;Panel;LW;3055;;16-bit Unsigned
+emul_mkcs_M1_rpm;Panel;LW;3056;;16-bit Unsigned
+emul_mkcs_M2_rpm;Panel;LW;3057;;16-bit Unsigned
+emul_mk_cs3;Panel;LW;3058;;16-bit Unsigned
+emul_mk_cs4;Panel;LW;3059;;16-bit Unsigned
+emul_mk_cs5;Panel;LW;3060;;16-bit Unsigned
+emul_mk_cs6;Panel;LW;3061;;16-bit Unsigned
+emul_mk_cs7;Panel;LW;3062;;16-bit Unsigned
+emul_mk_cs8;Panel;LW;3063;;16-bit Unsigned
+ret_read_mk;Panel;LW;3064;;16-bit Unsigned
+ret_write_mk1;Panel;LW;3065;;16-bit Unsigned
+ret_write_mk2;Panel;LW;3066;;16-bit Unsigned
+time_concentration_gaining;Panel;LW;3070;Время набора концентрации (в минутах);16-bit Unsigned
+time_concentration_gaining_prelim;Panel;LW;3071;Время выхода на промежуточное значение концентрации;16-bit Unsigned
+concentration_H2O2_prelim;Panel;LW;3072;;16-bit Unsigned
+cnt_time_concentration_gaining_sec;Panel;LW;3073;;16-bit Unsigned
+cnt_time_concentration_gaining_min;Panel;LW;3074;;16-bit Unsigned
+cnt_time_concentration_gaining_hour;Panel;LW;3075;;16-bit Unsigned
+time_desactivation;Panel;LW;3076;Время дезактивации;16-bit Unsigned
+time_desactivation_sec;Panel;LW;3077;;16-bit Unsigned
+time_desactivation_min;Panel;LW;3078;;16-bit Unsigned
+time_desactivation_hour;Panel;LW;3079;;16-bit Unsigned
+capacity_solution_H2O2;Panel;LW;3080;Объем раствора перекиси;16-bit Unsigned
+window_login;Panel;LW;3082;Номер окна для ввода пароля;16-bit Unsigned
+cnt_time_TE_condenser_out_of_range;Panel;LW;3084;счётчик;16-bit Unsigned
+cnt_time_TE_air_out_of_range;Panel;LW;3085;счётчик;16-bit Unsigned
+cnt_time_rpm_M1_out_of_range;Panel;LW;3086;счётчик;16-bit Unsigned
+cnt_time_rpm_M2_out_of_range;Panel;LW;3087;счётчик;16-bit Unsigned
+M1_out;Panel;LW;3088;Выход на М1 в процентах;16-bit Unsigned
+M2_out;Panel;LW;3089;Выход на М2 в процентах;16-bit Unsigned
+cnt_time_stage_conc_gaining_pump_on_first;Panel;LW;3090;Счётчик;16-bit Unsigned
+cnt_time_concentration_out_of_range;Panel;LW;3091;Счётчик;16-bit Unsigned
+cnt_time_damperY1;Panel;LW;3093;Счётчик;16-bit Unsigned
+cnt_time_damperY2;Panel;LW;3094;Счётчик;16-bit Unsigned
+cnt_max_ext_dehum_time_min;Panel;LW;3095;Счётчик;16-bit Unsigned
+cnt_max_ext_dehum_time_sec;Panel;LW;3096;Счётчик;16-bit Unsigned
+cnt_max_count_start_ext_dehum;Panel;LW;3097;Счётчик;16-bit Unsigned
+cnt_max_dehumi_time_min;Panel;LW;3098;Счётчик максимально допустимого времени (в минутах);16-bit Unsigned
+cnt_max_dehumi_time_hour;Panel;LW;3099;Счётчик максимально допустимого времени (в часах);16-bit Unsigned
+pid_S_TEH;Panel;LW;3100;;32-bit Float
+pid_E_TEH;Panel;LW;3102;;32-bit Float
+pid_U_TEH;Panel;LW;3104;;32-bit Float
+pid_X_TEH;Panel;LW;3106;;32-bit Float
+pid_Y_TEH;Panel;LW;3108;;32-bit Float
+number_of_mixing_fans;Panel;LW;3200;Количество перемешивающих вентиляторов;16-bit Unsigned
+mk_ai_filtr;Panel;LW;3201;Массив для фильтрации аналоговых входов;16-bit Unsigned
+mk_ai_filtr_first_record;Panel;LW;3209;Флаг первого обращения к массиву фильтрации (чтобы первоначально заполнить);16-bit Unsigned
+cnt_time_rpm_reg_M1;Panel;LW;3210;Счётчик;16-bit Unsigned
+cnt_time_rpm_reg_M2;Panel;LW;3211;Счётчик;16-bit Unsigned
+alarms_manage;Panel;LW;3212;Управление журналом отказов;16-bit Unsigned
+cnt_H2O2_sensor_prepare_to_work_min_left;Panel;LW;3213;количество оставшихся минут на прогрев;16-bit Unsigned
+cnt_H2O2_sensor_prepare_to_work_sec_left;Panel;LW;3214;количество оставшихся секунд на прогрев;16-bit Unsigned
+next_address_service;Panel;LW;3215;Следующий свободный адрес служебных переменных (с 3100 по 3199 под переменные ПИД);16-bit Unsigned
+plot_number_window;Panel;LW;3300;Окно графика;16-bit Unsigned
+plot_manage;Panel;LW;3301;Управление графиком;16-bit Unsigned
+plot_line;Panel;LW;3302;Линия наблюдения (занимает ячеек по числу отображаемых парамтров);16-bit Unsigned
+plot_concentration_H2O2;Panel;LW;3310;Параметры для сохранения в графики;16-bit Unsigned
+plot_temperature_air;Panel;LW;3311;;16-bit Unsigned
+plot_humidity_air;Panel;LW;3312;;16-bit Unsigned
+plot_temperature_TEH_condenser;Panel;LW;3313;;16-bit Unsigned
+plot_temperature_TEH_air;Panel;LW;3314;;16-bit Unsigned
+plot_TEHcondenser_out;Panel;LW;3315;;16-bit Unsigned
+plot_TEHair_out;Panel;LW;3316;;16-bit Unsigned
+avar_link_mk;Panel;LW_Bit;2000:00;Нет связи с МК;Неопределенный
+avar_dehum;Panel;LW_Bit;2000:01;Влажность не вышла на заданный режим;Неопределенный
+avar_not_ready;Panel;LW_Bit;2000:02;Нет готовности в режиме останов;Неопределенный
+avar_not_link_sensors_in_dehum;Panel;LW_Bit;2000:03;Нет связи с датчиками параметров воздуха в режиме Осушение;Неопределенный
+avar_te_TEHcondenser_out_of_range;Panel;LW_Bit;2000:04;Температура испарителя вне заданных пределах;Неопределенный
+avar_te_TEHair_out_of_range;Panel;LW_Bit;2000:05;Температура воздуха испарителя вне заданных пределах;Неопределенный
+avar_M1_out_of_range;Panel;LW_Bit;2000:06;В режиме деконтаминация отказ М1 (обороты = 0);Неопределенный
+avar2_te_TEHcondenser_out_of_range;Panel;LW_Bit;2001:00;Температура испарителя вне заданных пределов;Неопределенный
+avar2_te_TEHair_out_of_range;Panel;LW_Bit;2001:01;Температура воздуха ТЭН вне заданных пределов;Неопределенный
+avar2_not_concentration_gaining;Panel;LW_Bit;2001:02;Нет выхода на требуемую концентрацию;Неопределенный
+avar2_not_prelim_concentration_gaining;Panel;LW_Bit;2001:03;Нет предварительного выхода на концентрацию;Неопределенный
+avar2_rpm_M1_out_of_range;Panel;LW_Bit;2001:04;Обороты вентилятора М1 ниже допустимого диапазона;Неопределенный
+avar2_rpm_M2_out_of_range;Panel;LW_Bit;2001:05;Обороты вентилятора М2 ниже допустимого диапазона;Неопределенный
+avar2_concentration_out_of_range;Panel;LW_Bit;2001:06;Концентрация не соответсвует диапазону в режиме поддержания концентрации;Неопределенный
+avar2_Y1_fall;Panel;LW_Bit;2001:07;Концевики заслонки не соответствуют управляющему сигналу;Неопределенный
+avar2_Y2_fall;Panel;LW_Bit;2001:08;Концевики заслонки не соответствуют управляющему сигналу;Неопределенный
+avar2_concentration_in_desactivation;Panel;LW_Bit;2001:09;Концентрация перекиси не падает до необходимого уровня в дезактивации;Неопределенный
+avar2_not_link_sensors;Panel;LW_Bit;2001:10;Нет связи с датчиками параметров воздуха;Неопределенный
+avar2_ts;Panel;LW_Bit;2001:11;Сработка термостата испарителя;Неопределенный
+avar2_max_count_start_ext_dehum;Panel;LW_Bit;2001:12;Превышение количества запусков режима доп.осушение;Неопределенный
+avar2_mode_ext_dehum_time_exceeded;Panel;LW_Bit;2001:13;Превышение времени нахождения в режиме доп.осушение;Неопределенный
+avar3_link_sensor_te_air;Panel;LW_Bit;2002:00;КЗ или обрыв аналогового входа;Неопределенный
+avar3_link_sensor_humidity;Panel;LW_Bit;2002:01;КЗ или обрыв аналогового входа;Неопределенный
+avar3_link_sensor_concentration;Panel;LW_Bit;2002:02;КЗ или обрыв аналогового входа;Неопределенный
+avar3_link_te_TEH_air;Panel;LW_Bit;2002:03;КЗ или обрыв аналогового входа;Неопределенный
+avar3_link_te_TEH_condenser;Panel;LW_Bit;2002:04;КЗ или обрыв аналогового входа;Неопределенный
