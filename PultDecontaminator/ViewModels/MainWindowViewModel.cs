@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Configuration;
 using System.IO;
@@ -14,6 +15,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using PultDecontominator.Models;
 using PultDecontominator.Services;
+using PultDecontominator.Views;
 
 namespace PultDecontominator.ViewModels
 {
@@ -21,16 +23,26 @@ namespace PultDecontominator.ViewModels
     {
         public bool AuthTrue { get; set; }
         public DispatcherTimer timer;
+        public int DecontaminatorSlaveId
+        {
+            get { return _decontominatorSlaveId; }
+            set { SetProperty(ref _decontominatorSlaveId, value); }
+        }
         public List<string> Decontaminators
         {
             get { return _decontominators; }
             set { SetProperty(ref _decontominators, value); }
         }
-//        public ObservableCollection<DecontaminatorRegister> Registers
-        public List<DecontaminatorRegister> Registers
+        public ObservableCollection<DecontaminatorRegister> Registers
+        //        public List<DecontaminatorRegister> Registers RegisterValue
         {
             get { return _registers; }
-            set { SetProperty(ref _registers, value); }
+            set
+            {
+                SetProperty(ref _registers, value);
+//                RaisePropertyChanged(nameof(Registers));
+//                RaisePropertyChanged("RegisterValue");
+            }
         }
 
         public bool IsEnabledOpenComPort
@@ -83,10 +95,10 @@ namespace PultDecontominator.ViewModels
 
         public MainWindowViewModel()
         {
-
-            //_decontominators = new List<string>();
             Decontaminators = new List<string>();
-            //_registers = new ObservableCollection<DecontaminatorRegister>(ReadCSV("1.csv"));
+            var _decs = ConfigurationManager.AppSettings["SlaveIds"];
+            Decontaminators = _decs.Split(',').ToList();
+
             Port = new SerialPort("COM1");
             // configure serial port
             Port.BaudRate = Int32.Parse(ConfigurationManager.AppSettings["BaudRate"]); 
@@ -101,18 +113,14 @@ namespace PultDecontominator.ViewModels
             // _registers = new List<DecontaminatorRegister>(ReadCSV("1.csv"));
             try
             {
-                Registers = new List<DecontaminatorRegister>(ReadCSV("1.csv"));
-
+//                Registers = new List<DecontaminatorRegister>(ReadCSV("1.csv"));
+                Registers = new ObservableCollection<DecontaminatorRegister>(ReadCSV("1.csv"));
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Не считался CSV файл");
                 throw;
             }
-            //int value = Int32.Parse(ConfigurationManager.AppSettings["StartingMonthColumn"]);
-
-            var _decs = ConfigurationManager.AppSettings["SlaveIds"];
-            Decontaminators = _decs.Split(',').ToList();
 
             ExecuteStartDecontominationCommand = new DelegateCommand(ExecuteStartDecontomination, CanExecute);
             ExecuteStartDryCommand = new DelegateCommand(ExecuteStartDry, CanExecute);
@@ -132,7 +140,14 @@ namespace PultDecontominator.ViewModels
 
             if (Port != null && Port.IsOpen)
             {
-              if(IsPolling)  UpdateText = DateTime.Now.ToString("HH:mm:ss");
+                if (IsPolling)
+                {
+                    UpdateText = DateTime.Now.ToString("HH:mm:ss");
+                    foreach (var register in Registers)
+                    {
+                        register.RegisterValue = (ushort)Registers.IndexOf( register);
+                    }
+                }
             }
         }
         private void ExecuteCloseComPort()
@@ -206,11 +221,12 @@ namespace PultDecontominator.ViewModels
         private ushort _register;
         private int _addres;
         private List<string> _decontominators;
-        //private ObservableCollection<DecontaminatorRegister> _registers;
-        private List<DecontaminatorRegister> _registers = new List<DecontaminatorRegister>();
+        private ObservableCollection<DecontaminatorRegister> _registers = new ObservableCollection<DecontaminatorRegister>();
+       // private List<DecontaminatorRegister> _registers = new List<DecontaminatorRegister>();
 
         private bool _isEnabledOpenComPort;
         private bool _isPolling;
+        private int _decontominatorSlaveId;
 
         //public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         //{

@@ -25,13 +25,13 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="0.5*"></RowDefinition>
         </Grid.RowDefinitions>
-        <ListView x:Name="ListViewRegisters" Grid.Column="5" Grid.Row="0" Grid.RowSpan="6" ItemsSource="{Binding Registers}">
+        <ListView x:Name="ListViewRegisters" Grid.Column="5" Grid.Row="0" Grid.RowSpan="6" ItemsSource="{Binding Registers,Mode=OneWay}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Адрес" Width="50" DisplayMemberBinding="{Binding  Path=AddresRegister}"/>
-                    <GridViewColumn Header="значение" Width="80" DisplayMemberBinding="{Binding  Path=RegisterValue}"/>
-                    <GridViewColumn Header="Описание" Width="350" DisplayMemberBinding="{Binding Path=Description}"/>
-                    <GridViewColumn Header="переменная" Width="480" DisplayMemberBinding="{Binding  Path=Name}"/>
+                    <GridViewColumn Header="Адрес" Width="50" DisplayMemberBinding="{Binding  Path=AddresRegister,Mode=OneWay}"/>
+                    <GridViewColumn Header="значение" Width="80" DisplayMemberBinding="{Binding  Path=RegisterValue,Mode=OneWay}"/>
+                    <GridViewColumn Header="Описание" Width="350" DisplayMemberBinding="{Binding Path=Description,Mode=OneWay}"/>
+                    <GridViewColumn Header="переменная" Width="480" DisplayMemberBinding="{Binding  Path=Name,Mode=OneWay}"/>
                 </GridView>
             </ListView.View>
         </ListView>

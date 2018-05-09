@@ -1,9 +1,13 @@
 ﻿using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using PultDecontominator.Annotations;
 
 namespace PultDecontominator.Models
 {
-    public class DecontaminatorRegister
+    public class DecontaminatorRegister : INotifyPropertyChanged
     {
+
         public DecontaminatorRegister(string name, string panel, string typeData, int addresRegister, string description, string descriptionTypeData)
         {
             Name = name;
@@ -40,11 +44,33 @@ namespace PultDecontominator.Models
             get;
             set;
         }
+
         public ushort RegisterValue
         {
-            get;
-            set;
+            get => _registerValue;
+            set
+            {
+                _registerValue = value;
+                OnPropertyChanged("RegisterValue");
+            }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
+        private ushort _registerValue;
+
+        //[NotifyPropertyChangedInvocator]
+        //protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        //{
+        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        //}
     }
 }

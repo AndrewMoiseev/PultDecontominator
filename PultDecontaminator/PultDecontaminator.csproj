@@ -135,6 +135,7 @@
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\DataModbus.cs" />
     <Compile Include="Models\DecontaminatorRegisters.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\AuthService.cs" />
     <Compile Include="Services\IAuthService.cs" />
     <Compile Include="Services\IModbusService.cs" />
