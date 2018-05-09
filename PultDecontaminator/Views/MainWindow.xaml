@@ -42,7 +42,7 @@
         <GridSplitter Grid.Row="4" Grid.ColumnSpan="4" Height="2"
                       HorizontalAlignment="Stretch" VerticalAlignment="Center" />
         <Label Content="Выбор установки:" HorizontalAlignment="Left" Margin="10,10,0,0" Width="130" Height="32" VerticalAlignment="Top" />
-        <ComboBox Text="Номер деконтоминатора" Margin="145,10,10,0" Height="32" VerticalAlignment="Top" ItemsSource="{Binding Decontaminators}" SelectedIndex="0">
+        <ComboBox Text="Номер деконтоминатора" Margin="145,10,10,0" Height="32" VerticalAlignment="Top" ItemsSource="{Binding Decontaminators}" SelectedValue="{Binding DecontaminatorSlaveId, Mode=TwoWay}" SelectedIndex="0">
             <ComboBox.Effect>
                 <DropShadowEffect BlurRadius="3" Color="#FF4F4343" Opacity="0.815" ShadowDepth="3"/>
             </ComboBox.Effect>
@@ -56,6 +56,7 @@
             <Button Command="{Binding ExecuteStartDryCommand}" FontSize="14" Margin="20,10,20,10" IsEnabled="{Binding IsEnabled}">Осушение воздуха</Button>
             <Button Command="{Binding ExecuteOpenComPortCommand}" FontSize="14" Margin="20,10,20,10" IsEnabled="{Binding IsEnabledOpenComPort}">Open COM Port</Button>
             <Button Command="{Binding ExecuteCloseComPortCommand}" FontSize="14" Margin="20,10,20,10" IsEnabled="{Binding IsEnabled}" >Close  COM Port</Button>
+            <Button Command="{Binding ExecuteResetAvarCommand}" FontSize="14" Margin="20,10,20,10" IsEnabled="{Binding IsEnabled}" >Сброс отказов</Button>
         </StackPanel>
         <TextBlock TextWrapping="Wrap" Text="текущий режим и этап работы деконтаминатора" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" TextAlignment="Center" FontSize="16" Grid.Column="2" Grid.Row="0"/>
         <TextBlock TextWrapping="Wrap" Text="текущее значение температуры" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" TextAlignment="Center" FontSize="16" Grid.Column="2" Grid.Row="1" />
@@ -66,11 +67,11 @@
         <TextBlock TextWrapping="Wrap" Text="{Binding CurrentHum}" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" TextAlignment="Center" FontSize="16" Grid.Column="3" Grid.Row="2" />
         <TextBlock TextWrapping="Wrap" Text="{Binding CurrentH2O2}" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" TextAlignment="Center" FontSize="16" Grid.Column="3" Grid.Row="3" />
 
-        <StackPanel Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="5" Margin="3,3,3,3"  >
-            <TextBox Height="23" TextWrapping="Wrap" Text="{Binding InfoMessage}"/>
+        
+        <TextBox Grid.ColumnSpan="4" VerticalScrollBarVisibility="Auto" Grid.Row="5" Margin="3,3,3,3" TextWrapping="Wrap" Text="{Binding InfoMessage}" FontWeight="Bold" Foreground="#FF7E0303"/>
 
             <!--            <TextBlock FontSize="16" Text="{Binding InfoMessage}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFFB0101">Message</TextBlock> -->
-        </StackPanel>
+        
         <Label Content="Выбор режима:" HorizontalAlignment="Left" Margin="10,51,0,0" Width="130" Height="32" VerticalAlignment="Top" IsEnabled="False" />
         <ComboBox Text="Выбор режима" Margin="145,51,10,0" Height="32" VerticalAlignment="Top" ItemsSource="{Binding Regims}" IsEnabled="False" >
             <ComboBox.Effect>

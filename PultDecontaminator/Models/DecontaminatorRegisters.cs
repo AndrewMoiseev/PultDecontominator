@@ -8,7 +8,7 @@ namespace PultDecontominator.Models
     public class DecontaminatorRegister : INotifyPropertyChanged
     {
 
-        public DecontaminatorRegister(string name, string panel, string typeData, int addresRegister, string description, string descriptionTypeData)
+        public DecontaminatorRegister(string name, string panel, string typeData, ushort addresRegister, string description, string descriptionTypeData)
         {
             Name = name;
             Panel = panel;
@@ -29,7 +29,7 @@ namespace PultDecontominator.Models
             get;
             set;
         }
-        public int AddresRegister
+        public ushort AddresRegister
         {
             get;
             set;
