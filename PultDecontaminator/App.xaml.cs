@@ -13,6 +13,7 @@ namespace PultDecontominator
             base.OnStartup(e);
 
             var bootstrapper = new Bootstrapper();
+
             bootstrapper.Run();
         }
     }

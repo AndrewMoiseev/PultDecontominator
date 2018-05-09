@@ -7,7 +7,7 @@
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
-        Title="Пульт управления деконтаминатором" Height="450" Width="1116">
+        Title="{Binding UpdateText}" Height="450" Width="1116">
     <Grid Background="#FFB7BFC1" IsEnabled="{Binding AuthTrue}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -25,12 +25,13 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="0.5*"></RowDefinition>
         </Grid.RowDefinitions>
-        <ListView x:Name="ListViewRegisters" Grid.Column="5" Grid.Row="0" Grid.RowSpan="6" ItemsSource="{Binding Decontaminators}">
+        <ListView x:Name="ListViewRegisters" Grid.Column="5" Grid.Row="0" Grid.RowSpan="6" ItemsSource="{Binding Registers}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Описание" Width="300" DisplayMemberBinding="{Binding Path=Description}"/>
-                    <GridViewColumn Header="значение" Width="150" DisplayMemberBinding="{Binding Path=LastName}"/>
-                    <GridViewColumn Header="переменная" Width="80" DisplayMemberBinding="{Binding Path=ID}"/>
+                    <GridViewColumn Header="Адрес" Width="50" DisplayMemberBinding="{Binding  Path=AddresRegister}"/>
+                    <GridViewColumn Header="значение" Width="80" DisplayMemberBinding="{Binding  Path=RegisterValue}"/>
+                    <GridViewColumn Header="Описание" Width="350" DisplayMemberBinding="{Binding Path=Description}"/>
+                    <GridViewColumn Header="переменная" Width="480" DisplayMemberBinding="{Binding  Path=Name}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -49,16 +50,12 @@
         </ComboBox>
 
         <StackPanel  Grid.Column="0" Grid.Row="1" Grid.RowSpan="3">
-            <Frame Height="30"></Frame>
-            <Button Command="{Binding ExecuteStopCommand}" FontSize="14" IsEnabled="False">Останов</Button>
-            <Frame Height="30"></Frame>
-            <Button Command="{Binding ExecuteStartDecontaminationCommand}" FontSize="14" IsEnabled="False">Деконтаминация</Button>
-            <Frame Height="30"></Frame>
-            <Button Command="{Binding ExecuteStartDryCommand}" FontSize="14" IsEnabled="False">Осушение воздуха</Button>
-            <Frame Height="40"></Frame>
-            <Button Command="{Binding ExecuteOpenComPortCommand}" FontSize="14" >Open COM Port</Button>
-            <Frame Height="20"></Frame>
-            <Button Command="{Binding ExecuteCloseComPortCommand}" FontSize="14" IsEnabled="False" >Close  COM Port</Button>
+            <CheckBox IsChecked="{Binding IsPolling}" Content="Опрос регистров" Margin="20,10,0,10"/>
+            <Button Command="{Binding ExecuteStopCommand}" Margin="20,10,20,10" FontSize="14" IsEnabled="{Binding IsEnabled}">Останов</Button>
+            <Button Command="{Binding ExecuteStartDecontaminationCommand}"  Margin="20,10,20,10" FontSize="14" IsEnabled="{Binding IsEnabled}">Деконтаминация</Button>
+            <Button Command="{Binding ExecuteStartDryCommand}" FontSize="14" Margin="20,10,20,10" IsEnabled="{Binding IsEnabled}">Осушение воздуха</Button>
+            <Button Command="{Binding ExecuteOpenComPortCommand}" FontSize="14" Margin="20,10,20,10" IsEnabled="{Binding IsEnabledOpenComPort}">Open COM Port</Button>
+            <Button Command="{Binding ExecuteCloseComPortCommand}" FontSize="14" Margin="20,10,20,10" IsEnabled="{Binding IsEnabled}" >Close  COM Port</Button>
         </StackPanel>
         <TextBlock TextWrapping="Wrap" Text="текущий режим и этап работы деконтаминатора" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" TextAlignment="Center" FontSize="16" Grid.Column="2" Grid.Row="0"/>
         <TextBlock TextWrapping="Wrap" Text="текущее значение температуры" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" TextAlignment="Center" FontSize="16" Grid.Column="2" Grid.Row="1" />

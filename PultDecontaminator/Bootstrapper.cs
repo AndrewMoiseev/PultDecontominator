@@ -13,6 +13,7 @@ namespace PultDecontominator
 
         protected override void InitializeShell()
         {
+            
             //Application.Current.MainWindow.Show();
         }
     }
