@@ -31,37 +31,52 @@ namespace PultDecontominator.ViewModels
         public bool DoReset { get; set; }
 
         public DispatcherTimer timer;
+
         public byte DecontaminatorSlaveId
         {
             get { return _decontominatorSlaveId; }
             set { SetProperty(ref _decontominatorSlaveId, value); }
         }
+
         public List<string> Decontaminators
         {
             get { return _decontominators; }
             set { SetProperty(ref _decontominators, value); }
         }
-
         
         public string CurrentReg
         {
             get { return _currentReg; }
             set { SetProperty(ref _currentReg, value); }
         }
+
+        public string CurrentTteni
+        {
+            get { return _currentTteni; }
+            set { SetProperty(ref _currentTteni, value); }
+        }
+
         public string CurrentTerm
         {
             get { return _currentTerm; }
             set { SetProperty(ref _currentTerm, value); }
         }
+
         public string CurrentHum
         {
             get { return _currentHum; }
             set { SetProperty(ref _currentHum, value); }
         }
+
         public string CurrentH2O2
         {
             get { return _currentH2O2; }
             set { SetProperty(ref _currentH2O2, value); }
+        }
+        public string CurrentTpvi
+        {
+            get { return _currentTpvi; }
+            set { SetProperty(ref _currentTpvi, value); }
         }
 
         public ObservableCollection<DecontaminatorRegister> Registers
@@ -131,6 +146,7 @@ namespace PultDecontominator.ViewModels
         }
 
         public readonly SerialPortAdapter Adapter;
+        public int LogSize;
 
         public DelegateCommand ExecuteStartDryCommand { get; private set; }
         public DelegateCommand ExecuteStartDecontominationCommand { get; private set; }
@@ -145,14 +161,15 @@ namespace PultDecontominator.ViewModels
             Decontaminators = new List<string>();
             var _decs = ConfigurationManager.AppSettings["SlaveIds"];
             Decontaminators = _decs.Split(',').ToList();
-
-            Port = new SerialPort("COM1");
+            LogSize =  Int32.Parse(ConfigurationManager.AppSettings["LogSize"]);
+            //Port = new SerialPort("COM7");
+            Port = new SerialPort(ConfigurationManager.AppSettings["SerialPort"]);
             // configure serial port
             Port.BaudRate = Int32.Parse(ConfigurationManager.AppSettings["BaudRate"]); 
             Port.DataBits = Int32.Parse(ConfigurationManager.AppSettings["DataBits"]); 
             Port.Parity = Parity.None;
             Port.StopBits = StopBits.One;
-
+            
             Adapter = new SerialPortAdapter(Port);
             Master = ModbusSerialMaster.CreateRtu(Adapter);
 
@@ -199,8 +216,9 @@ namespace PultDecontominator.ViewModels
             ushort temperatureAir = 0;
             ushort humidityAir = 0;
 
+            bool isDo = DoStop || DoDry || DoDec || DoReset;
 
-            if (Port != null && Port.IsOpen)
+            if (Port != null && Port.IsOpen )
             {
 
                // InfoMessage += "Нет связи с МК \r\n";
@@ -208,16 +226,27 @@ namespace PultDecontominator.ViewModels
                 if (DoDry)
                 {
                     Master.WriteSingleRegister(DecontaminatorSlaveId, 3001, 2);
-                    Master.WriteSingleRegister(DecontaminatorSlaveId, 1000, 2);
+                    Master.WriteSingleRegister(DecontaminatorSlaveId, 1000, 1);
                 }
                 if (DoDec)
                 {
                     Master.WriteSingleRegister(DecontaminatorSlaveId, 3001, 1);
-                    Master.WriteSingleRegister(DecontaminatorSlaveId, 1000, 2);
+                    Master.WriteSingleRegister(DecontaminatorSlaveId, 1000, 1);
                 }
                 if (DoStop)
                 {
-                    Master.WriteSingleRegister(DecontaminatorSlaveId, 1000, 2);
+                    //Master.WriteSingleRegister(DecontaminatorSlaveId, 1000, 2);
+                    try
+                    {
+                        //ushort[] data1 = Master.ReadHoldingRegisters(17, 107, 3);
+                        //Master.WriteSingleRegister(DecontaminatorSlaveId, 3001, 0);
+                        Master.WriteSingleRegister(DecontaminatorSlaveId, 1000, 2);
+                    }
+                    catch (Exception exception)
+                    {
+                        Console.WriteLine(exception);
+                        throw;
+                    }
                 }
                 if (DoReset)
                 {
@@ -229,6 +258,7 @@ namespace PultDecontominator.ViewModels
                 {
                     UpdateText = DateTime.Now.ToString("HH:mm:ss");
 
+                    //  ////////                  
                     PopulateAvar();
 
                     foreach (var register in Registers)
@@ -266,7 +296,7 @@ namespace PultDecontominator.ViewModels
                         }
                         if (register.AddresRegister == 301)
                         {
-                            CurrentH2O2 = ModbusUtility.GetSingle( register.RegisterValue, concentrationH2O2).ToString() ;
+                            CurrentH2O2 = ModbusUtility.GetSingle( register.RegisterValue, concentrationH2O2).ToString("0.00") +" %";
                         }
 
                         if (register.AddresRegister == 302)
@@ -275,7 +305,7 @@ namespace PultDecontominator.ViewModels
                         }
                         if (register.AddresRegister == 303)
                         {
-                            CurrentTerm = ModbusUtility.GetSingle(register.RegisterValue, temperatureAir).ToString();
+                            CurrentTerm = ModbusUtility.GetSingle(register.RegisterValue, temperatureAir).ToString("0.00") + " °C";
                         }
 
                         if (register.AddresRegister == 304)
@@ -284,18 +314,38 @@ namespace PultDecontominator.ViewModels
                         }
                         if (register.AddresRegister == 305)
                         {
-                            CurrentHum = ModbusUtility.GetSingle(register.RegisterValue, humidityAir).ToString();
+                            CurrentHum = ModbusUtility.GetSingle(register.RegisterValue, humidityAir).ToString("0.00") + " %";
                         }
 
+                        if (register.AddresRegister == 308)
+                        {
+                            humidityAir = register.RegisterValue;
+                        }
+                        if (register.AddresRegister == 309)
+                        {
+                            CurrentTpvi = ModbusUtility.GetSingle(register.RegisterValue, humidityAir).ToString("0.00") + " °C";
+                        }
+
+                        if (register.AddresRegister == 306)
+                        {
+                            humidityAir = register.RegisterValue;
+                        }
+                        if (register.AddresRegister == 307)
+                        {
+                            CurrentTteni = ModbusUtility.GetSingle(register.RegisterValue, humidityAir).ToString("0.00") + " °C";
+                        }
                     }
 
                 }
+                DoStop = false;
+                DoDry = false;
+                DoDec = false;
+                DoReset = false;
+
+ ;
             }
 
-            DoStop = false;
-            DoDry = false;
-            DoDec = false;
-            DoReset = false;
+
         }
 
         private void PopulateAvar()
@@ -303,57 +353,64 @@ namespace PultDecontominator.ViewModels
             ushort[] registers = new ushort[] { 1, 2, 3 };
             registers = Master.ReadHoldingRegisters(DecontaminatorSlaveId, 2000, 3);
             //2000:00	Нет связи с МК
-            if ((registers[0] & 0x01) != 0) InfoMessage += "Нет связи с МК \r\n";
+            if ((registers[0] & 0x01) != 0) InfoMessage = DateTime.Now+ "Нет связи с МК \r\n" + InfoMessage;
             //2000:01	Влажность не вышла на заданный режим
-            if ((registers[0] & 0x02) != 0) InfoMessage += "Влажность не вышла на заданный режим \r\n";
+            if ((registers[0] & 0x02) != 0) InfoMessage = DateTime.Now + "Влажность не вышла на заданный режим \r\n" + InfoMessage;
             //2000:02	Нет готовности в режиме останов
-            if ((registers[0] & 0x04) != 0) InfoMessage += "Нет готовности в режиме останов \r\n";
+            if ((registers[0] & 0x04) != 0) InfoMessage = DateTime.Now + "Нет готовности в режиме останов \r\n" + InfoMessage;
             //2000:03	Нет связи с датчиками параметров воздуха в режиме Осушение
-            if ((registers[0] & 0x08) != 0) InfoMessage += "Нет связи с датчиками параметров воздуха в режиме Осушение \r\n";
+            if ((registers[0] & 0x08) != 0) InfoMessage = DateTime.Now + "Нет связи с датчиками параметров воздуха в режиме Осушение \r\n" + InfoMessage;
             //2000:04	Температура испарителя вне заданных пределах
-            if ((registers[0] & 0x10) != 0) InfoMessage += "Температура испарителя вне заданных пределах \r\n";
+            if ((registers[0] & 0x10) != 0) InfoMessage = DateTime.Now + "Температура испарителя вне заданных пределах \r\n" + InfoMessage;
             //2000:05	Температура воздуха испарителя вне заданных пределах
-            if ((registers[0] & 0x20) != 0) InfoMessage += "Температура воздуха испарителя вне заданных пределах \r\n";
+            if ((registers[0] & 0x20) != 0) InfoMessage = DateTime.Now + "Температура воздуха испарителя вне заданных пределах \r\n" + InfoMessage;
             //2000:06	В режиме деконтаминация отказ М1(обороты = 0)
-            if ((registers[0] & 0x40) != 0) InfoMessage += "В режиме деконтаминация отказ М1(обороты = 0) \r\n";
+            if ((registers[0] & 0x40) != 0) InfoMessage = DateTime.Now + "В режиме деконтаминация отказ М1(обороты = 0) \r\n" + InfoMessage;
             //2002:00	КЗ или обрыв аналогового входа
-            if ((registers[2] & 0x01) != 0) InfoMessage += "КЗ или обрыв аналогового входа \r\n";
+            if ((registers[2] & 0x01) != 0) InfoMessage = DateTime.Now + "КЗ или обрыв аналогового входа \r\n" + InfoMessage;
             //2002:01	КЗ или обрыв аналогового входа
-            if ((registers[2] & 0x02) != 0) InfoMessage += "КЗ или обрыв аналогового входа \r\n";
+            if ((registers[2] & 0x02) != 0) InfoMessage = DateTime.Now + "КЗ или обрыв аналогового входа \r\n" + InfoMessage;
             //2002:02	КЗ или обрыв аналогового входа
-            if ((registers[2] & 0x04) != 0) InfoMessage += "КЗ или обрыв аналогового входа \r\n";
+            if ((registers[2] & 0x04) != 0) InfoMessage = DateTime.Now + "КЗ или обрыв аналогового входа \r\n" + InfoMessage;
             //2002:03	КЗ или обрыв аналогового входа
-            if ((registers[2] & 0x08) != 0) InfoMessage += "КЗ или обрыв аналогового входа \r\n";
+            if ((registers[2] & 0x08) != 0) InfoMessage = DateTime.Now + "КЗ или обрыв аналогового входа \r\n" + InfoMessage;
             //2002:04	КЗ или обрыв аналогового входа
-            if ((registers[2] & 0x10) != 0) InfoMessage += "КЗ или обрыв аналогового входа \r\n";
+            if ((registers[2] & 0x10) != 0) InfoMessage = DateTime.Now + "КЗ или обрыв аналогового входа \r\n" + InfoMessage;
             //2001:00	Температура испарителя вне заданных пределов
-            if ((registers[1] & 0x01) != 0) InfoMessage += "Температура испарителя вне заданных пределов \r\n";
+            if ((registers[1] & 0x01) != 0) InfoMessage = DateTime.Now + "Температура испарителя вне заданных пределов \r\n" + InfoMessage;
             //2001:01	Температура воздуха ТЭН вне заданных пределов
-            if ((registers[1] & 0x02) != 0) InfoMessage += "Температура воздуха ТЭН вне заданных пределов \r\n";
+            if ((registers[1] & 0x02) != 0) InfoMessage = DateTime.Now + "Температура воздуха ТЭН вне заданных пределов \r\n" + InfoMessage;
             //2001:02	Нет выхода на требуемую концентрацию
-            if ((registers[1] & 0x04) != 0) InfoMessage += "Нет выхода на требуемую концентрацию \r\n";
+            if ((registers[1] & 0x04) != 0) InfoMessage = DateTime.Now + "Нет выхода на требуемую концентрацию \r\n" + InfoMessage;
             //2001:03	Нет предварительного выхода на концентрацию
-            if ((registers[1] & 0x08) != 0) InfoMessage += "Нет предварительного выхода на концентрацию \r\n";
+            if ((registers[1] & 0x08) != 0) InfoMessage = DateTime.Now + "Нет предварительного выхода на концентрацию \r\n" + InfoMessage;
             //2001:04	Обороты вентилятора М1 ниже допустимого диапазона
-            if ((registers[1] & 0x10) != 0) InfoMessage += "Обороты вентилятора М1 ниже допустимого диапазона \r\n";
+            if ((registers[1] & 0x10) != 0) InfoMessage = DateTime.Now + "Обороты вентилятора М1 ниже допустимого диапазона \r\n" + InfoMessage;
             //2001:05	Обороты вентилятора М2 ниже допустимого диапазона
-            if ((registers[1] & 0x20) != 0) InfoMessage += "Обороты вентилятора М2 ниже допустимого диапазона \r\n";
+            if ((registers[1] & 0x20) != 0) InfoMessage = DateTime.Now + "Обороты вентилятора М2 ниже допустимого диапазона \r\n" + InfoMessage;
             //2001:06	Концентрация не соответсвует диапазону в режиме поддержания концентрации
-            if ((registers[1] & 0x40) != 0) InfoMessage += "Концентрация не соответсвует диапазону в режиме поддержания концентрации \r\n";
+            if ((registers[1] & 0x40) != 0) InfoMessage = DateTime.Now + "Концентрация не соответсвует диапазону в режиме поддержания концентрации \r\n" + InfoMessage;
             //2001:07	Концевики заслонки не соответствуют управляющему сигналу
-            if ((registers[1] & 0x80) != 0) InfoMessage += "Концевики заслонки не соответствуют управляющему сигналу \r\n";
+            if ((registers[1] & 0x80) != 0) InfoMessage = DateTime.Now + "Концевики заслонки Y1 не соответствуют управляющему сигналу \r\n" + InfoMessage;
             //2001:08	Концевики заслонки не соответствуют управляющему сигналу
-            if ((registers[1] & 0x100) != 0) InfoMessage += "Концевики заслонки не соответствуют управляющему сигналу \r\n";
+            if ((registers[1] & 0x100) != 0) InfoMessage = DateTime.Now + " Концевики заслонки Y2 не соответствуют управляющему сигналу \r\n" + InfoMessage;
             //2001:09	Концентрация перекиси не падает до необходимого уровня в дезактивации
-            if ((registers[1] & 0x200) != 0) InfoMessage += "Концентрация перекиси не падает до необходимого уровня в дезактивации \r\n";
+            if ((registers[1] & 0x200) != 0) InfoMessage = DateTime.Now + "Концентрация перекиси не падает до необходимого уровня в дезактивации \r\n" + InfoMessage; 
             //2001:10	Нет связи с датчиками параметров воздуха
-            if ((registers[1] & 0x400) != 0) InfoMessage += "Нет связи с датчиками параметров воздуха \r\n";
+            if ((registers[1] & 0x400) != 0) InfoMessage = DateTime.Now + "Нет связи с датчиками параметров воздуха \r\n" + InfoMessage;
             //2001:11	Сработка термостата испарителя
-            if ((registers[1] & 0x800) != 0) InfoMessage += "Сработка термостата испарителя \r\n";
+            if ((registers[1] & 0x800) != 0) InfoMessage = DateTime.Now + "Сработка термостата испарителя \r\n" + InfoMessage;
             //2001:12	Превышение количества запусков режима доп.осушение
-            if ((registers[1] & 0x1000) != 0) InfoMessage += "Превышение количества запусков режима доп.осушение \r\n";
+            if ((registers[1] & 0x1000) != 0) InfoMessage = DateTime.Now + "Превышение количества запусков режима доп.осушение \r\n" + InfoMessage;
             //2001:13	Превышение времени нахождения в режиме доп.осушение
-            if ((registers[1] & 0x2000) != 0) InfoMessage += "Превышение времени нахождения в режиме доп.осушение \r\n";
+            if ((registers[1] & 0x2000) != 0) InfoMessage = DateTime.Now + "Превышение времени нахождения в режиме доп.осушение \r\n" + InfoMessage;
+
+            if (InfoMessage.Length > 100000)
+            {
+                File.AppendAllText("avar" + DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ".log", InfoMessage);
+                InfoMessage = "Данные записаны в лог.";
+            }
+
         }
 
 
@@ -443,6 +500,8 @@ namespace PultDecontominator.ViewModels
         private string _currentHum;
         private string _currentH2O2;
         private string _infoMessage;
+        private string _currentTteni;
+        private string _currentTpvi;
 
         //public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         //{
