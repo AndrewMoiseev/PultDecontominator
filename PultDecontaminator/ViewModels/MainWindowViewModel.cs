@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading;
 using System.Web.UI;
 using System.Windows;
+using System.Windows.Media.Converters;
 using System.Windows.Threading;
 using Modbus.Device;
 using Modbus.Serial;
@@ -169,7 +170,10 @@ namespace PultDecontominator.ViewModels
             Port.DataBits = Int32.Parse(ConfigurationManager.AppSettings["DataBits"]); 
             Port.Parity = Parity.None;
             Port.StopBits = StopBits.One;
-            
+
+            Port.ReadTimeout = 200;
+            Port.WriteTimeout = 200;
+
             Adapter = new SerialPortAdapter(Port);
             Master = ModbusSerialMaster.CreateRtu(Adapter);
 
@@ -188,6 +192,8 @@ namespace PultDecontominator.ViewModels
                 MessageBox.Show(e.Message, "Не считался CSV файл");
                 throw;
             }
+            Registers = new ObservableCollection<DecontaminatorRegister>(Registers.OrderBy(n => n.AddresRegister));
+
 
             ExecuteStartDecontominationCommand = new DelegateCommand(ExecuteStartDecontomination, CanExecute);
             ExecuteStartDryCommand = new DelegateCommand(ExecuteStartDry, CanExecute);
@@ -207,7 +213,38 @@ namespace PultDecontominator.ViewModels
             DoReset = false;
 
             InfoMessage = "";
+
+            _listAddrLenPairs = new List<KeyValuePair<ushort, ushort>>();
+            bool doNext = true;
+            ushort addrReg = 1;
+            ushort saveAddrReg = 1;
+            ushort lenReceive = 0;
+
+            ushort kolvoRegs = 1;
+
+            foreach (var register in Registers)
+            {
+                doNext = (register.AddresRegister - 1) != addrReg;
+                addrReg = register.AddresRegister;
+                lenReceive++;
+
+                if (doNext)
+                {
+                    _listAddrLenPairs.Add(new KeyValuePair<ushort, ushort>(saveAddrReg, lenReceive));
+                    saveAddrReg = addrReg;
+                    lenReceive = 0;
+                    //doNext = false;
+                }
+
+                kolvoRegs = addrReg;
+            }
+            lenReceive++;
+            _listAddrLenPairs.Add(new KeyValuePair<ushort, ushort>(saveAddrReg, lenReceive ));
+
+            _valRegs = new ushort[kolvoRegs+1];
+
         }
+
 
         private void timer_Tick(object sender, EventArgs e)
         {
@@ -215,8 +252,10 @@ namespace PultDecontominator.ViewModels
             ushort concentrationH2O2 = 0;
             ushort temperatureAir = 0;
             ushort humidityAir = 0;
+            ushort temperatureTen = 0;
+            ushort temperaturePv = 0;
 
-            bool isDo = DoStop || DoDry || DoDec || DoReset;
+            // bool isDo = DoStop || DoDry || DoDec || DoReset;
 
             if (Port != null && Port.IsOpen )
             {
@@ -226,12 +265,12 @@ namespace PultDecontominator.ViewModels
                 if (DoDry)
                 {
                     Master.WriteSingleRegister(DecontaminatorSlaveId, 3001, 2);
-                    Master.WriteSingleRegister(DecontaminatorSlaveId, 1000, 1);
+                    Master.WriteSingleRegisterAsync(DecontaminatorSlaveId, 1000, 1);
                 }
                 if (DoDec)
                 {
                     Master.WriteSingleRegister(DecontaminatorSlaveId, 3001, 1);
-                    Master.WriteSingleRegister(DecontaminatorSlaveId, 1000, 1);
+                    Master.WriteSingleRegisterAsync(DecontaminatorSlaveId, 1000, 1);
                 }
                 if (DoStop)
                 {
@@ -240,7 +279,7 @@ namespace PultDecontominator.ViewModels
                     {
                         //ushort[] data1 = Master.ReadHoldingRegisters(17, 107, 3);
                         //Master.WriteSingleRegister(DecontaminatorSlaveId, 3001, 0);
-                        Master.WriteSingleRegister(DecontaminatorSlaveId, 1000, 2);
+                        Master.WriteSingleRegisterAsync(DecontaminatorSlaveId, 1000, 2);
                     }
                     catch (Exception exception)
                     {
@@ -250,7 +289,7 @@ namespace PultDecontominator.ViewModels
                 }
                 if (DoReset)
                 {
-                    Master.WriteSingleRegister(DecontaminatorSlaveId, 1000, 3);
+                    Master.WriteSingleRegisterAsync(DecontaminatorSlaveId, 1000, 3);
                     InfoMessage = "";
                 }
 
@@ -261,10 +300,36 @@ namespace PultDecontominator.ViewModels
                     //  ////////                  
                     PopulateAvar();
 
+
+                    foreach (var addrLenPair in _listAddrLenPairs)
+                    {
+                        try
+                        {
+                            ushort[] values = Master.ReadHoldingRegistersAsync(DecontaminatorSlaveId, addrLenPair.Key,addrLenPair.Value).Result;
+                        Array.Copy(values, 0, _valRegs, addrLenPair.Key, addrLenPair.Value);
+                        }
+                        catch (Exception e1)
+                        {
+                            if (e1.InnerException != null)
+                            {
+                                MessageBox.Show(e1.InnerException.Message);
+                            }
+                            else
+                            {
+                                MessageBox.Show(e1.Message);
+                            }
+                            return;
+                            //throw;
+                            //ExecuteCloseComPort();
+                        }
+                    }
+
                     foreach (var register in Registers)
                     {
-                        
-                        register.RegisterValue = Master.ReadHoldingRegisters(DecontaminatorSlaveId, register.AddresRegister, 1)[0];
+
+                        // register.RegisterValue = Master.ReadHoldingRegisters(DecontaminatorSlaveId, register.AddresRegister, 1)[0];
+
+                        register.RegisterValue = _valRegs[register.AddresRegister];
 
                         if (register.AddresRegister == 1)
                         {
@@ -319,20 +384,20 @@ namespace PultDecontominator.ViewModels
 
                         if (register.AddresRegister == 308)
                         {
-                            humidityAir = register.RegisterValue;
+                            temperaturePv = register.RegisterValue;
                         }
                         if (register.AddresRegister == 309)
                         {
-                            CurrentTpvi = ModbusUtility.GetSingle(register.RegisterValue, humidityAir).ToString("0.00") + " °C";
+                            CurrentTpvi = ModbusUtility.GetSingle(register.RegisterValue, temperaturePv).ToString("0.00") + " °C";
                         }
 
                         if (register.AddresRegister == 306)
                         {
-                            humidityAir = register.RegisterValue;
+                            temperatureTen = register.RegisterValue;
                         }
                         if (register.AddresRegister == 307)
                         {
-                            CurrentTteni = ModbusUtility.GetSingle(register.RegisterValue, humidityAir).ToString("0.00") + " °C";
+                            CurrentTteni = ModbusUtility.GetSingle(register.RegisterValue, temperatureTen).ToString("0.00") + " °C";
                         }
                     }
 
@@ -348,10 +413,30 @@ namespace PultDecontominator.ViewModels
 
         }
 
+        private static List<KeyValuePair<ushort, ushort>> _listAddrLenPairs;
+        private ushort[] _valRegs;
+
         private void PopulateAvar()
         {
             ushort[] registers = new ushort[] { 1, 2, 3 };
-            registers = Master.ReadHoldingRegisters(DecontaminatorSlaveId, 2000, 3);
+            try
+            {
+                registers = Master.ReadHoldingRegistersAsync(DecontaminatorSlaveId, 2000, 3).Result;
+            }
+            catch (Exception e)
+            {
+                if (e.InnerException != null)
+                {
+                    MessageBox.Show(e.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(e.Message);
+                }
+                //throw;
+                ExecuteCloseComPort();
+            }
+
             //2000:00	Нет связи с МК
             if ((registers[0] & 0x01) != 0) InfoMessage = DateTime.Now+ "Нет связи с МК \r\n" + InfoMessage;
             //2000:01	Влажность не вышла на заданный режим

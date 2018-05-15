@@ -1,0 +1,33 @@
+bt_enable_change;Panel;LB;0;Разрешение изменений;Неопределенный
+bt_enable_work;Panel;LB;1;Активен штатный алгоритм работы;Неопределенный
+bt_enable_test;Panel;LB;2;Активен алгоритм режима ТЕСТ;Неопределенный
+bt_enable_mk_comm;Panel;LB;3;Включен информационный обмен с МК;Неопределенный
+bt_hand_on;Panel;LB;4;Активен ручной режим;Неопределенный
+bt_change_mode;Panel;LB;5;Выполнить макрос при изменении режима;Неопределенный
+bt_ready_to_start;Panel;LB;6;Достигнуто состояние готовности;Неопределенный
+bt_h2o2_sensor_ready;Panel;LB;7;Сенсор перекиси прогрет;Неопределенный
+bt_save_preference;Panel;LB;8;Выполнить макрос сохранения настроек;Неопределенный
+bt_emulation_on;Panel;LB;9;Режим эмуляции входных сигналов;Неопределенный
+bt_calc_params_dependent_on_capacity;Panel;LB;10;Выполнить макрос расчёта параметров зависимых от объема;Неопределенный
+bt_stage_pause_cnt_set;Panel;LB;11;счётчик этапа паузы взведён;Неопределенный
+bt_stage_pause_cnt_stop;Panel;LB;12;отсчёт времени этапа пазуы закончен;Неопределенный
+bt_stage_conc_gaining_cnt_set;Panel;LB;13;счётчик этапа выхода на концентрацию взведен;Неопределенный
+bt_stage_conc_gaining_cnt_stop;Panel;LB;14;Достигнута концентрация или отсчитано время;Неопределенный
+bt_stage_desactivation_cnt_set;Panel;LB;15;счётчик этапа дезактивации взведён;Неопределенный
+bt_stage_desactivation_cnt_stop;Panel;LB;16;отсчёт времени этапа дезактивации закончен;Неопределенный
+bt_stage_conc_gaining_get;Panel;LB;17;Достигнута требуемая концентрация;Неопределенный
+bt_stage_decontamination_cnt_set;Panel;LB;18;счётчик этапа дезинфекции взведён;Неопределенный
+bt_stage_decontamination_cnt_stop;Panel;LB;19;;Неопределенный
+bt_mode_ext_dehum_cnt_set;Panel;LB;20;счётчик режима дополнительного осушения взведён;Неопределенный
+bt_mode_ext_dehum_cnt_stop;Panel;LB;21;;Неопределенный
+bt_TE_air_in_range;Panel;LB;22;Температура воздуха ТЭН в допустимых пределах;Неопределенный
+bt_TE_condenser_in_range;Panel;LB;23;Температура воздуха испарителя в допустимых пределах;Неопределенный
+bt_check_password;Panel;LB;24;Выполнить макрос проверки пароля;Неопределенный
+bt_M1_rpm_in_range;Panel;LB;25;Обороты М1 в допустимых пределах;Неопределенный
+bt_M2_rpm_in_range;Panel;LB;26;Обороты М2 в допустимых пределах;Неопределенный
+bt_humidity_out_of_range;Panel;LB;27;Влажность ниже допустимого диапазона;Неопределенный
+bt_concentration_out_of_range;Panel;LB;28;Концентрация перекиси ниже диапазона;Неопределенный
+bt_humidity_in_ext_dehum_in_range;Panel;LB;29;Влажность в режиме доп.осушение в норме;Неопределенный
+bt_mode_desactivation_concentration_OK;Panel;LB;30;Концентрация перекиси на этапе дезактивации упала ниже необходимого уровня (1ppm);Неопределенный
+bt_temperature_exposition_in_range;Panel;LB;31;Температура для экспозиции в норме;Неопределенный
+bt_humidity_exposition_in_range;Panel;LB;32;Влажность для начала экспозиции в норме;Неопределенный

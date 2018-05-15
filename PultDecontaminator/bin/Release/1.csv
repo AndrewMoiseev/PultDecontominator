@@ -1,0 +1,97 @@
+mode;Panel;LW;1;Код режима;16-bit Unsigned
+stage;Panel;LW;2;Этап;16-bit Unsigned
+set_room_capacity;Panel;LW;100;Объем помещения;16-bit Unsigned
+set_concentration_H2O2;Panel;LW;101;Уставка концентрации перекиси;16-bit Unsigned
+set_time_decontamination;Panel;LW;102;Длительность времени обеззараживания (в минутах);16-bit Unsigned
+set_upper_temperature_exposition;Panel;LW;103;Верхний предел температуры воздуха для начала экспозиции;16-bit Unsigned
+set_humidity_exposition;Panel;LW;104;Влажность для начала экспозиции;16-bit Unsigned
+set_max_dehumi_time;Panel;LW;105;Максимально допустимое время осушения (в минутах);16-bit Unsigned
+set_temperature_TEH_condenser;Panel;LW;106;Температура ТЭН испарителя;16-bit Unsigned
+set_temperature_TEH_air;Panel;LW;107;Температура ТЭН воздуха;16-bit Unsigned
+set_rpm_M1;Panel;LW;108;Количество оборотов М1;16-bit Unsigned
+set_rpm_M2;Panel;LW;109;Количество оборотов М2;16-bit Unsigned
+set_pump_cnt_OFF_stage2;Panel;LW;111;выход на концентрацию;16-bit Unsigned
+set_pump_cnt_OFF_stage3;Panel;LW;112;обеззараживание;16-bit Unsigned
+set_pump_cnt_OFF_stage4;Panel;LW;113;не используется;16-bit Unsigned
+set_pump_cnt_ON_stage1;Panel;LW;114;выход на концентрацию 1;16-bit Unsigned
+set_pump_cnt_ON_stage2;Panel;LW;115;выход на концентрацию 2;16-bit Unsigned
+set_pump_cnt_ON_stage3;Panel;LW;116;обеззараживание;16-bit Unsigned
+set_pump_cnt_ON_stage4;Panel;LW;117;дезактивация;16-bit Unsigned
+set_temperature_TEH_air_reg_ON;Panel;LW;139;Температура включения нагрева воздуха (от уставки);16-bit Unsigned
+set_temperarute_TEH_air_reg_OFF;Panel;LW;140;Температура отключения нагрева воздуха (от уставки);16-bit Unsigned
+set_concentration_H2O2_reg_ON;Panel;LW;141;Уставка концентрации перекиси для включения насоса (от уставки);16-bit Unsigned
+set_concentration_H2O2_reg_OFF;Panel;LW;142;Уставка концентрации перекиси для отключения насоса (от уставки);16-bit Unsigned
+mkao_lamp_work;Panel;LW;225;;16-bit Unsigned
+mkao_lamp_alarm;Panel;LW;226;;16-bit Unsigned
+mk_ao4;Panel;LW;227;;16-bit Unsigned
+mk_ao5;Panel;LW;228;;16-bit Unsigned
+mk_ao6;Panel;LW;229;;16-bit Unsigned
+mk_ao7;Panel;LW;230;;16-bit Unsigned
+mk_ao8;Panel;LW;231;;16-bit Unsigned
+mkcs_M1_rpm;Panel;LW;232;;16-bit Unsigned
+mkcs_M2_rpm;Panel;LW;233;;16-bit Unsigned
+mk_cs3;Panel;LW;234;;16-bit Unsigned
+mk_cs4;Panel;LW;235;;16-bit Unsigned
+mk_cs5;Panel;LW;236;;16-bit Unsigned
+mk_cs6;Panel;LW;237;;16-bit Unsigned
+mk_cs7;Panel;LW;238;;16-bit Unsigned
+mk_cs8;Panel;LW;239;;16-bit Unsigned
+mk_res1;Panel;LW;240;;16-bit Unsigned
+mk_res2;Panel;LW;241;;16-bit Unsigned
+mk_res3;Panel;LW;242;;16-bit Unsigned
+mk_res4;Panel;LW;243;;16-bit Unsigned
+mk_res5;Panel;LW;244;;16-bit Unsigned
+mk_res6;Panel;LW;245;;16-bit Unsigned
+mk_res7;Panel;LW;246;;16-bit Unsigned
+mk_res8;Panel;LW;247;;16-bit Unsigned
+mk_PWMon1;Panel;LW;248;;16-bit Unsigned
+mk_PWMon2;Panel;LW;249;;16-bit Unsigned
+mk_PWMon3;Panel;LW;250;;16-bit Unsigned
+mk_PWMon4;Panel;LW;251;;16-bit Unsigned
+mk_PWMon5;Panel;LW;252;;16-bit Unsigned
+mk_PWMon6;Panel;LW;253;;16-bit Unsigned
+mk_PWMon7;Panel;LW;254;;16-bit Unsigned
+mk_PWMon8;Panel;LW;255;;16-bit Unsigned
+mk_PWMout1;Panel;LW;256;;16-bit Unsigned
+mk_PWMout2;Panel;LW;257;;16-bit Unsigned
+mk_PWMout3;Panel;LW;258;;16-bit Unsigned
+mk_PWMout4;Panel;LW;259;;16-bit Unsigned
+mk_PWMout5;Panel;LW;260;;16-bit Unsigned
+mk_PWMout6;Panel;LW;261;;16-bit Unsigned
+mk_PWMout7;Panel;LW;262;;16-bit Unsigned
+mk_PWMout8;Panel;LW;263;;16-bit Unsigned
+fl_concentration_H2O2;Panel;LW;300;;32-bit Float
+fl_concentration_H2O2l;Panel;LW;301;;32-bit Float
+fl_temperature_air;Panel;LW;302;;32-bit Float
+fl_temperature_airl;Panel;LW;303;;32-bit Float
+fl_humidity_air;Panel;LW;304;;32-bit Float
+fl_humidity_airl;Panel;LW;305;;32-bit Float
+fl_temperature_TEH_condenser;Panel;LW;306;;32-bit Float
+fl_temperature_TEH_condenserl;Panel;LW;307;;32-bit Float
+fl_temperature_TEH_air;Panel;LW;308;;32-bit Float
+fl_temperature_TEH_airl;Panel;LW;309;;32-bit Float
+ao4;Panel;LW;411;;16-bit Unsigned
+ao5;Panel;LW;412;;16-bit Unsigned
+ao6;Panel;LW;413;;16-bit Unsigned
+ao7;Panel;LW;414;;16-bit Unsigned
+ao8;Panel;LW;415;;16-bit Unsigned
+mode_select;Panel;LW;3001;Выбор режима;16-bit Unsigned
+stage_select;Panel;LW;3002;Выбор этапа;16-bit Unsigned
+cnt_time_sec_decontamination;Panel;LW;3004;Счётчик длительности (в секундах);16-bit Unsigned
+cnt_time_min_decontamination;Panel;LW;3006;Счётчик длительности (в минутах);16-bit Unsigned
+cnt_time_hour_decontamination;Panel;LW;3007;Счётчик длительности (в часах);16-bit Unsigned
+cnt_max_dehumi_time_sec;Panel;LW;3008;Счётчик максимально допустимого времени;16-bit Unsigned
+pump_stage_work;Panel;LW;3010;этап работы насоса (всего 4);16-bit Unsigned
+pump_cnt_ON;Panel;LW;3011;счётчик включенного состояния насоса;16-bit Unsigned
+pump_cnt_OFF;Panel;LW;3012;счётчик отключенного состояния насоса;16-bit Unsigned
+pump_stage_work_mem;Panel;LW;3013;память режима работы насоса (в алгоритме переключения);16-bit Unsigned
+cnt_H2O2_sensor_prepare_to_work;Panel;LW;3014;счетчик времени прогрева;16-bit Unsigned
+window_number_confirm;Panel;LW;3015;номер окна в которое выводятся подтверждения операций;16-bit Unsigned
+cnt_time_pause_sec;Panel;LW;3016;счётчик секунд паузы (обратный отсчёт);16-bit Unsigned
+cnt_time_pause_min;Panel;LW;3017;счетчик минут паузы (обратный отсчёт);16-bit Unsigned
+time_concentration_gaining;Panel;LW;3070;Время набора концентрации (в минутах);16-bit Unsigned
+M1_out;Panel;LW;3088;Выход на М1 в процентах;16-bit Unsigned
+M2_out;Panel;LW;3089;Выход на М2 в процентах;16-bit Unsigned
+number_of_mixing_fans;Panel;LW;3200;Количество перемешивающих вентиляторов;16-bit Unsigned
+cnt_H2O2_sensor_prepare_to_work_min_left;Panel;LW;3213;количество оставшихся минут на прогрев;16-bit Unsigned
+cnt_H2O2_sensor_prepare_to_work_sec_left;Panel;LW;3214;количество оставшихся секунд на прогрев;16-bit Unsigned
