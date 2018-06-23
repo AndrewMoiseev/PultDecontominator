@@ -8,6 +8,12 @@ namespace PultDecontominator.Services
         
 
         private IModbusService _modbusServiceImplementation;
+
+        public ModbusService()
+        {
+
+        }
+
         public async Task<bool> StartDryTask()
         {
             return await _modbusServiceImplementation.StartDryTask();
